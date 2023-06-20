@@ -142,33 +142,40 @@ st.markdown("<br>  <br>", unsafe_allow_html=True)
 # Agregar botón
 submitted = col4.form_submit_button("Predict")
 
+#st.write(horario_llegada.strftime("%H%M"))
+
 if submitted:
     #2. Let's build a dictionary containing the parameters for our API...
-    params = dict(aeropuerto_origen=aeropuerto_origen,
-                aeropuerto_destino=aeropuerto_destino,
-                dia=dia,
-                mes=mes,
-                dia_de_semana=dia_de_semana,
-                scheduled_arrival=horario_llegada,
-                aerolinea=aerolinea,
-                scheduled_time=scheduled_time,
+    params = dict(aeropuerto_origen=str(aeropuerto_origen),
+                aeropuerto_destino=str(aeropuerto_destino),
+                dia=str(dia),
+                mes=str(mes),
+                dia_de_semana=str(dia_de_semana),
+                #scheduled_arrival="2150",
+                scheduled_arrival=horario_llegada.strftime("%H%M"),
+                aerolinea=str(aerolinea),
+                scheduled_time=str(scheduled_time),
                 )
 
 
     #3. Let's call our APIusing the `requests` package...
-    flight_predict_api_url ='https://flightpredictor-icyevpoxta-uw.a.run.app/'
+    flight_predict_api_url ='https://flightpredictor-icyevpoxta-uw.a.run.app/predict'
     response = requests.get(flight_predict_api_url, params=params)
+    #response.json()['predictions']
+    #4. Let's retrieve the prediction from the **JSON** returned by the API...s
+    prediction = response.json()['predictions']
+    prediction
+
+
 
     #4. Let's retrieve the prediction from the **JSON** returned by the API...
-    response.url
-    prediction = response.json()
-    prediction
-    pred = prediction['predictions']
+
+    #pred = prediction['predictions']
 
     #Finally, we can display the prediction to the user
-    st.header(f'La predicción es: {pred}')
+    #st.header(f'La predicción es: {pred}')
 
-    if pred[0] == 1:
+    if prediction[0] == 1:
         st.error("La probabilidad que tu vuelo sea cancelado es !")
     else:
         st.success('Viaja tranquilo, tu vuelo no se cancelará!')
