@@ -45,7 +45,7 @@ st.markdown(page_bg_img, unsafe_allow_html=True)
 #with open('style.css') as f:
 #    st.markdown(f'<style>{f.read()}</style>', unsafe_allow_html=True)
 
-st.title("Travel relaxed, plan with SureFly")
+st.title("SureFly: No Surprises, Just Smooth Skies")
 
 
 
@@ -123,7 +123,7 @@ with st.form(key='params_for_api'):
         (1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12))
 
     # Agregar HORARIO DE SALIDA en cuarta columna
-    horario_llegada = col6.time_input('Scheduled arrival', datetime.time(8, 1), step=60 )
+    horario_llegada = col6.time_input('Arrival', datetime.time(8, 1), step=60 )
 
     #Agregar AEROLINEA en quinta columna
     aerolinea = col7.selectbox(
@@ -134,7 +134,7 @@ with st.form(key='params_for_api'):
 
     #
     #Schedule arrival
-    scheduled_time = col8.number_input('Scheduled time (min)')
+    scheduled_time = col8.number_input('Duration (min)', step=1)
 
 
 #Agregar otro espacio vertical
