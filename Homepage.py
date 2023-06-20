@@ -156,7 +156,7 @@ if submitted:
 
 
     #3. Let's call our APIusing the `requests` package...
-    flight_predict_api_url ='https://flightpredictor-icyevpoxta-uw.a.run.app/predict'
+    flight_predict_api_url ='https://flightpredictor-icyevpoxta-uw.a.run.app/'
     response = requests.get(flight_predict_api_url, params=params)
 
     #4. Let's retrieve the prediction from the **JSON** returned by the API...
