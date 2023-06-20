@@ -11,7 +11,7 @@ import requests
 st.set_page_config(page_title="SureFly ✈️", page_icon="images/icono.png", layout="wide")
 
 #2 image para agregar un logo
-st.image("images/surefly.png", width=200)
+st.image("images/surefly_sin_fondo.png", width=200)
 
 page_bg_img = """
 <style>

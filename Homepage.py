@@ -2,6 +2,7 @@
 import streamlit as st
 import datetime
 import requests
+import json
 
 
 
@@ -11,7 +12,7 @@ import requests
 st.set_page_config(page_title="SureFly ✈️", page_icon="images/icono.png", layout="wide")
 
 #2 image para agregar un logo
-st.image("images/surefly.png", width=200)
+st.image("images/surefly_sin_fondo.png", width=200)
 
 page_bg_img = """
 <style>
@@ -161,22 +162,20 @@ if submitted:
     #3. Let's call our APIusing the `requests` package...
     flight_predict_api_url ='https://flightpredictor-icyevpoxta-uw.a.run.app/predict'
     response = requests.get(flight_predict_api_url, params=params)
+
     #response.json()['predictions']
     #4. Let's retrieve the prediction from the **JSON** returned by the API...s
     prediction = response.json()['predictions']
-    prediction
-
-
-
-    #4. Let's retrieve the prediction from the **JSON** returned by the API...
-
-    #pred = prediction['predictions']
-
-    #Finally, we can display the prediction to the user
-    #st.header(f'La predicción es: {pred}')
+    #prediction
+    probabilidad = prediction[1:-1].split()
+    probabilidad = [float(value) for value in probabilidad]
+    #st.write(probabilidad[0])
+    #st.write(probabilidad[1])
+    p_no_cancelado= round(probabilidad[0]*100)
+    p_cancelado =round(probabilidad[1]*100)
 
     if prediction[0] == 1:
-        st.error("La probabilidad que tu vuelo sea cancelado es !")
+        st.error(f"La probabilidad que tu vuelo sea cancelado es {p_cancelado}%!")
     else:
-        st.success('Viaja tranquilo, tu vuelo no se cancelará!')
+        st.success(f'Viaja tranquilo, la probabilidad de que tu vuelo no sea cancelado es {p_no_cancelado}%!')
         st.balloons()
