@@ -149,27 +149,27 @@ if submitted:
                 dia=dia,
                 mes=mes,
                 dia_de_semana=dia_de_semana,
-                horario=horario_llegada,
+                scheduled_arrival=horario_llegada,
                 aerolinea=aerolinea,
                 scheduled_time=scheduled_time,
-                scheduled_arrival=horario_llegada)
+                )
 
 
     #3. Let's call our APIusing the `requests` package...
-    flight_predict_api_url ='https://flight-predictor-container-icyevpoxta-uc.a.run.app/predict'
+    flight_predict_api_url ='https://flightpredictor-icyevpoxta-uw.a.run.app/predict'
     response = requests.get(flight_predict_api_url, params=params)
 
     #4. Let's retrieve the prediction from the **JSON** returned by the API...
     response.url
     prediction = response.json()
     prediction
-    #pred = prediction['predictions']
+    pred = prediction['predictions']
 
-    ## Finally, we can display the prediction to the user
-    #st.header(f'La predicción es: {pred}')
+    #Finally, we can display the prediction to the user
+    st.header(f'La predicción es: {pred}')
 
-    #if pred[0] == 1:
-    #    st.error('Warning! La probabilidad que tu vuelo sea cancelado es!')
-    #else:
-    #    st.success('Puedes relajarte, tu vuelo no se cancelará!')
-    #    st.balloons()
+    if pred[0] == 1:
+        st.error("La probabilidad que tu vuelo sea cancelado es !")
+    else:
+        st.success('Viaja tranquilo, tu vuelo no se cancelará!')
+        st.balloons()

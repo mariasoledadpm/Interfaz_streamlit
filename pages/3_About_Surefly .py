@@ -35,3 +35,16 @@ background-position:cover;
 </style>
 """
 st.markdown(page_bg_img, unsafe_allow_html=True)
+
+st.title("Cancelación de vuelos", anchor="title")
+st.header("Problemas", anchor="chap-1")
+
+with st.expander("Pasajeros"):
+    st.write('Hello, *World!* :sunglasses:')
+
+with st.expander("Aerolíneas"):
+    st.write('Hello, *World!* :sunglasses:')
+
+st.header("Data", anchor="chap-1")
+with st.expander("Data"):
+    st.write('Hello, *World!* :sunglasses:')

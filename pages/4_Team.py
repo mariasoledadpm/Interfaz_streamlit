@@ -2,7 +2,7 @@
 import streamlit as st
 import datetime
 import requests
-
+from PIL import Image
 
 
 
@@ -45,11 +45,11 @@ with st.expander("Integrantes"):
 
     c1,c2,c3 = st.columns(3)
     with c1:
-        st.image("images/pet1.jpg")
-        st.write("pet1")
+        image1 = Image.open("images/diego.jpeg")
+        st.image(image1, caption="Diego García-Huidobro")
     with c2:
-        st.image("images/pet2.jpg")
-        st.write("pet2")
+        image2 = Image.open("images/sole.jpeg")
+        st.image(image2, caption="María Soledad Peña")
     with c3:
-        st.image("images/pet3.jpg")
-        st.write("pet3")
+        image3 = Image.open("images/nacho.jpeg")
+        st.image(image3, caption="Ignacio Lambardi")
