@@ -174,7 +174,9 @@ if submitted:
     p_no_cancelado= round(probabilidad[0]*100)
     p_cancelado =round(probabilidad[1]*100)
 
-    if prediction[0] == 1:
+    st.write(p_cancelado)
+
+    if p_cancelado > 10:
         st.error(f"La probabilidad que tu vuelo sea cancelado es {p_cancelado}%!")
     else:
         st.success(f'Viaja tranquilo, la probabilidad de que tu vuelo no sea cancelado es {p_no_cancelado}%!')

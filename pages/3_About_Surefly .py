@@ -47,4 +47,5 @@ with st.expander("Aerolíneas"):
 
 st.header("Data", anchor="chap-1")
 with st.expander("Data"):
-    st.write('Hello, *World!* :sunglasses:')
+    st.write('Oportunidad de mejora :sunglasses:, agregar variable clima la predicción aumentará su valor, porque se podra predecir las situaciones adversas que podría enfrentar un vuelo /n por tiempo no se alcanzó"
+             )
