@@ -36,41 +36,58 @@ background-position:cover;
 """
 st.markdown(page_bg_img, unsafe_allow_html=True)
 
-st.title("Cancelación de vuelos", anchor="title")
-st.header("Problemas", anchor="chap-1")
+st.title("Flight Cancellation", anchor="title")
+st.header("👎Problems", anchor="chap-1")
 
 
-with st.expander("😕 PASAJEROS"):
-    st.write('Retrasos en los planes de viaje pueden generar:')
+with st.expander("😕 PASSENGERS"):
+    st.write('Travel delays can result in:')
 
-    st.write("▶️*Estrés* en viajeros de negocios y turistas.")
+    st.write("🔹*Stress* for business travelers and tourists.")
     st.write(" ")
-    st.write("▶️Interrupción en itinerarios.")
+    st.write("🔹Disruption of itineraries.")
     st.write(" ")
-    st.write("▶️Pérdida de conexiones.")
+    st.write("🔹Missed connections.")
     st.write(" ")
-    st.write("▶️Demora en la llegada a destinos.")
+    st.write("🔹Delayed arrival at destinations.")
     st.write(" ")
-    st.write("▶️Costos adicionales en alojamiento por cambios en reservas de hoteles, actividades planificadas y gastos de transporte terrestre.")
+    st.write("🔹Additional costs for accommodations due to changes in hotel reservations, planned activities, and ground transportation expenses.")
 
-with st.expander("✈️ AEROLÍNEAS"):
-    st.write('Impacto en la reputación de la aerolínea:')
+with st.expander("✈️ AIRLINES"):
+    st.write('Impact on airline reputation:')
     st.write(" ")
-    st.write("▶️Pasajeros insatisfechos comparten experiencias negativas.")
+    st.write("🔹Dissatisfied passengers share negative experiences.")
     st.write(" ")
-    st.write('Pérdida de ingresos:')
-    st.write("▶️Por reembolsos y reprogramación de vuelos cancelados.")
+    st.write('Loss of revenue:')
+    st.write("🔹Due to refunds and rescheduling of canceled flights.")
     st.write(" ")
-    st.write("Impacto en operaciones y logística:")
+    st.write("Impact on operations and logistics:")
     st.write(" ")
-    st.write("▶️Cambios en asignación de aeronaves, tripulación y reacomodación de pasajeros en otros vuelos.")
+    st.write("🔹Changes in aircraft allocation, crew scheduling, and passenger re-accommodation on other flights.")
 
 
 
-st.header("Data", anchor="chap-1")
-with st.expander("DATA"):
-    st.write(" ")
+st.header("📊 Data", anchor="chap-1")
+with st.expander("📁 DATA KAGGLE"):
+    st.write("Kaggle dataset consisting of 3 tables that contains information about all the flights canceled or delayed during the year 2015 at all airports in the United States.")
+    url = "https://www.kaggle.com/datasets/usdot/flight-delays"
+    st.markdown("Check out this [link](%s) on Kaggle. " % url)
 
-with st.expander(":sunglasses: MEJORAS"):
-    st.write("▶️Agregar variable 'Clima' aumentaría el valor de la predicción,")
-    st.write("ya que se consideraría las situaciones adversas que puede enfrentar un vuelo.")
+with st.expander("📂 FEATURES"):
+    st.write("🔹Origin airport")
+    st.write("🔹Destination airport")
+    st.write("🔹Day")
+    st.write("🔹Day of week")
+    st.write("🔹Month")
+    st.write("🔹Scheduled arrival")
+    st.write("🔹Airline")
+    st.write("🔹Duration")
+
+with st.expander("📂 TARGET"):
+    st.write("🔹Cancelled")
+    st.write("🔹Delay")
+
+st.header("🔎 Technical approach", anchor="chap-1")
+with st.expander("🤖 MACHINE LEARNING"):
+    st.write("🔹XG Boost Classificator")
+    st.write("🔹Decision Tree Classifier")

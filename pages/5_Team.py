@@ -45,10 +45,10 @@ with st.expander("Integrantes"):
 
     c1,c2,c3 = st.columns(3)
     with c1:
-        image1 = Image.open("images/diseño.png")
+        image1 = Image.open("images/diego2.png")
         st.image(image1, caption="Diego García-Huidobro")
     with c2:
-        image2 = Image.open("images/sole1.png")
+        image2 = Image.open("images/sole2.png")
         st.image(image2, caption="María Soledad Peña")
     with c3:
         image3 = Image.open("images/nacho.jpeg")
