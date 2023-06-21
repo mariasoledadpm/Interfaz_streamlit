@@ -36,20 +36,3 @@ background-position:cover;
 </style>
 """
 st.markdown(page_bg_img, unsafe_allow_html=True)
-
-st.title("Equipo Predicción de cancelación de vuelos☕", anchor="title")
-st.header("Batch 1249, Le Wagon", anchor="chap-1")
-st.subheader("Data Science", anchor="sub-1")
-
-with st.expander("Integrantes"):
-
-    c1,c2,c3 = st.columns(3)
-    with c1:
-        image1 = Image.open("images/diego.jpeg")
-        st.image(image1, caption="Diego García-Huidobro")
-    with c2:
-        image2 = Image.open("images/sole.jpeg")
-        st.image(image2, caption="María Soledad Peña")
-    with c3:
-        image3 = Image.open("images/nacho.jpeg")
-        st.image(image3, caption="Ignacio Lambardi")

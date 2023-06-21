@@ -143,6 +143,7 @@ st.markdown("<br>  <br>", unsafe_allow_html=True)
 # Agregar botón
 submitted = col4.form_submit_button("Predict")
 
+
 #st.write(horario_llegada.strftime("%H%M"))
 
 if submitted:
@@ -174,10 +175,10 @@ if submitted:
     p_no_cancelado= round(probabilidad[0]*100)
     p_cancelado =round(probabilidad[1]*100)
 
-    st.write(p_cancelado)
+
 
     if p_cancelado > 10:
-        st.error(f"La probabilidad que tu vuelo sea cancelado es {p_cancelado}%!")
+        st.error(f"Consider alternatives. Your flight has a high {p_cancelado}% cancellation chance.")
     else:
-        st.success(f'Viaja tranquilo, la probabilidad de que tu vuelo no sea cancelado es {p_no_cancelado}%!')
+        st.success(f'Travel worry-free! Your flight has a high {p_no_cancelado}% chance of operation.')
         st.balloons()

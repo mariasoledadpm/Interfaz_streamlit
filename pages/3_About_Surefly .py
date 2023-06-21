@@ -39,13 +39,38 @@ st.markdown(page_bg_img, unsafe_allow_html=True)
 st.title("Cancelación de vuelos", anchor="title")
 st.header("Problemas", anchor="chap-1")
 
-with st.expander("Pasajeros"):
-    st.write('Hello, *World!* :sunglasses:')
 
-with st.expander("Aerolíneas"):
-    st.write('Hello, *World!* :sunglasses:')
+with st.expander("😕 PASAJEROS"):
+    st.write('Retrasos en los planes de viaje pueden generar:')
+
+    st.write("▶️*Estrés* en viajeros de negocios y turistas.")
+    st.write(" ")
+    st.write("▶️Interrupción en itinerarios.")
+    st.write(" ")
+    st.write("▶️Pérdida de conexiones.")
+    st.write(" ")
+    st.write("▶️Demora en la llegada a destinos.")
+    st.write(" ")
+    st.write("▶️Costos adicionales en alojamiento por cambios en reservas de hoteles, actividades planificadas y gastos de transporte terrestre.")
+
+with st.expander("✈️ AEROLÍNEAS"):
+    st.write('Impacto en la reputación de la aerolínea:')
+    st.write(" ")
+    st.write("▶️Pasajeros insatisfechos comparten experiencias negativas.")
+    st.write(" ")
+    st.write('Pérdida de ingresos:')
+    st.write("▶️Por reembolsos y reprogramación de vuelos cancelados.")
+    st.write(" ")
+    st.write("Impacto en operaciones y logística:")
+    st.write(" ")
+    st.write("▶️Cambios en asignación de aeronaves, tripulación y reacomodación de pasajeros en otros vuelos.")
+
+
 
 st.header("Data", anchor="chap-1")
-with st.expander("Data"):
-    st.write('Oportunidad de mejora :sunglasses:, agregar variable clima la predicción aumentará su valor, porque se podra predecir las situaciones adversas que podría enfrentar un vuelo /n por tiempo no se alcanzó"
-             )
+with st.expander("DATA"):
+    st.write(" ")
+
+with st.expander(":sunglasses: MEJORAS"):
+    st.write("▶️Agregar variable 'Clima' aumentaría el valor de la predicción,")
+    st.write("ya que se consideraría las situaciones adversas que puede enfrentar un vuelo.")

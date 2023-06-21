@@ -1,51 +1,61 @@
 #Importar streamlit
 import streamlit as st
-#from PIL import Image
 import datetime
 import requests
+import json
+
 
 
 #Características básicas
 
 #1 Definir un ícono y título que tendrá la página en la pestaña del navegadorss
-st.set_page_config(page_title="SureFly ✈️", page_icon="icono.png", layout="wide")
+st.set_page_config(page_title="SureFly ✈️", page_icon="images/icono.png", layout="wide")
 
 #2 image para agregar un logo
-st.image("surefly.png", width=200)
+st.image("images/surefly_sin_fondo.png", width=200)
+
+page_bg_img = """
+<style>
+[data-testid='stAppViewContainer'] {
+background-image: url("https://images.unsplash.com/photo-1514542124776-b1401b7dd173?ixlib=rb-4.0.3&q=85&fm=jpg&crop=entropy&cs=srgb&dl=shea-rouda-RL2xSO3vFmQ-unsplash.jpg");
+background-size: cover;
+}
+
+[data-testid="stHeader"] {
+background-color: rgba(0, 0, 0, 0);
+}
+
+[data-testid="stToolbar"]{
+right: 2rem;
+}
+
+[data-testid="stSidebar"] {
+background-image: url("https://images.unsplash.com/photo-1514542124776-b1401b7dd173?ixlib=rb-4.0.3&q=85&fm=jpg&crop=entropy&cs=srgb&dl=shea-rouda-RL2xSO3vFmQ-unsplash.jpg");
+background-position:cover;
+}
+</style>
+"""
+
+
+
+st.markdown(page_bg_img, unsafe_allow_html=True)
+
 
 #3 title para definir el título que ve el usuario al abrir la página
-st.title("Viaja relajado, planifica con SureFly ")
+#with open('style.css') as f:
+#    st.markdown(f'<style>{f.read()}</style>', unsafe_allow_html=True)
 
-import base64
+st.title("SureFly: No Surprises, Just Smooth Skies")
 
-def get_base64(bin_file):
-    with open(bin_file, 'rb') as f:
-        data = f.read()
-    return base64.b64encode(data).decode()
-
-
-def set_background(png_file):
-    bin_str = get_base64(png_file)
-    page_bg_img = '''
-    <style>
-    body {
-    background-image: url("data:image/png;base64,%s");
-    background-size: cover;
-    }
-    </style>
-    ''' % bin_str
-    st.markdown(page_bg_img, unsafe_allow_html=True)
-
-set_background('fondo1.png')
 
 
 with st.form(key='params_for_api'):
     #4 Crear columnas para alinear los botones
-    col1, col2, col3, col4, col5, col6, col7, col8, col9 = st.columns(9)
+    col1, col2, col3, col4, col5, col6, col7, col8 = st.columns(8)
 
     # Agregar AEROPUERTO DE ORIGEN en la primera columna
     aeropuerto_origen = col1.selectbox(
-        'Código aeropuerto origen',
+        'Origin Airport',
         ('ABE', 'ABI', 'ABQ', 'ABR', 'ABY', 'ACK', 'ACT', 'ACV', 'ACY', 'ADK', 'ADQ', 'AEX', 'AGS', 'AKN',
         'ALB', 'ALO', 'AMA', 'ANC', 'APN', 'ASE', 'ATL', 'ATW', 'AUS', 'AVL', 'AVP', 'AZO', 'BDL', 'BET', 'BFL', 'BGM',
         'BGR', 'BHM', 'BIL', 'BIS', 'BJI', 'BLI', 'BMI', 'BNA', 'BOI', 'BOS', 'BPT', 'BQK', 'BQN', 'BRD', 'BRO', 'BRW',
@@ -70,7 +80,7 @@ with st.form(key='params_for_api'):
 
     # Agregar AEROPUERTO DE DESTINO en la segunda columna
     aeropuerto_destino = col2.selectbox(
-        'Código aeropuerto destino',
+        'Destination Airport',
         ('ABE', 'ABI', 'ABQ', 'ABR', 'ABY', 'ACK', 'ACT', 'ACV', 'ACY', 'ADK', 'ADQ', 'AEX', 'AGS', 'AKN',
         'ALB', 'ALO', 'AMA', 'ANC', 'APN', 'ASE', 'ATL', 'ATW', 'AUS', 'AVL', 'AVP', 'AZO', 'BDL', 'BET', 'BFL', 'BGM',
         'BGR', 'BHM', 'BIL', 'BIS', 'BJI', 'BLI', 'BMI', 'BNA', 'BOI', 'BOS', 'BPT', 'BQK', 'BQN', 'BRD', 'BRO', 'BRW',
@@ -98,65 +108,77 @@ with st.form(key='params_for_api'):
 
     #Agregar Día de viaje
     dia = col3.selectbox(
-        '¿Qué día viajas?',
+        'Day',
         (1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22,
         23, 24, 25, 26, 27, 28, 29, 30, 31))
 
     #Agregar Día de la semana
     dia_de_semana = col4.selectbox(
-        '¿Qué día de la semana viajas?',
-        ('Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado', 'Domingo'))
+        'Day of week',
+        (1, 2, 3, 4, 5, 6, 7))
 
     #Agregar Mes de viaje
     mes = col5.selectbox(
-        '¿Qué mes viajas?',
+        'Month',
         (1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12))
 
     # Agregar HORARIO DE SALIDA en cuarta columna
-    horario = col6.time_input('Horario de salida', datetime.time(8, 1), step=60 )
+    horario_llegada = col6.time_input('Arrival', datetime.time(8, 1), step=60 )
 
     #Agregar AEROLINEA en quinta columna
     aerolinea = col7.selectbox(
-        '¿En qué aerolínea viajas?',
+        "Airline",
         ('United Air Lines Inc.', 'American Airlines Inc.', 'US Airways Inc.', 'Frontier Airlines Inc.', 'JetBlue Airways', 'Skywest Airlines Inc.',
         'Alaska Airlines Inc.', 'Spirit Air Lines', 'Southwest Airlines Co.', 'Delta Air Lines Inc.', 'Atlantic Southeast Airlines',
         'Hawaiian Airlines Inc.', 'American Eagle Airlines Inc.', 'Virgin America'))
 
     #
-    #Schedule time
-    scheduled_time = col8.number_input('Scheduled time')
-
-    #Schedule arribal
-    scheduled_arrival = col9.number_input('Scheduled arribal')
+    #Schedule arrival
+    scheduled_time = col8.number_input('Duration (min)', step=1)
 
 
 #Agregar otro espacio vertical
 st.markdown("<br>  <br>", unsafe_allow_html=True)
 
 # Agregar botón
-submitted = col4.form_submit_button("Enviar Datos")
+#submitted = col4.form_submit_button("Predict")
+submitted = st.form_submit_button("Predict")
+
+#st.write(horario_llegada.strftime("%H%M"))
 
 if submitted:
     #2. Let's build a dictionary containing the parameters for our API...
-    params = dict(aeropuerto_origen=aeropuerto_origen,
-                aeropuerto_destino=aeropuerto_destino,
-                dia=dia,
-                mes=mes,
-                dia_de_semana=6,
-                horario=horario,
-                aerolinea=aerolinea,
-                scheduled_time=scheduled_time,
-                scheduled_arrival=scheduled_arrival)
+    params = dict(aeropuerto_origen=str(aeropuerto_origen),
+                aeropuerto_destino=str(aeropuerto_destino),
+                dia=str(dia),
+                mes=str(mes),
+                dia_de_semana=str(dia_de_semana),
+                #scheduled_arrival="2150",
+                scheduled_arrival=horario_llegada.strftime("%H%M"),
+                aerolinea=str(aerolinea),
+                scheduled_time=str(scheduled_time),
+                )
 
 
-    #3. Let's call our API using the `requests` package...
-    flight_predict_api_url = 'http://127.0.0.1:8200/predict'
+    #3. Let's call our APIusing the `requests` package...
+    flight_predict_api_url ='https://flightpredictor-icyevpoxta-uw.a.run.app/predict'
     response = requests.get(flight_predict_api_url, params=params)
 
-    #4. Let's retrieve the prediction from the **JSON** returned by the API...
-    prediction = response.json()
+    #response.json()['predictions']
+    #4. Let's retrieve the prediction from the **JSON** returned by the API...s
+    prediction = response.json()['predictions']
+    #prediction
+    probabilidad = prediction[1:-1].split()
+    probabilidad = [float(value) for value in probabilidad]
+    #st.write(probabilidad[0])
+    #st.write(probabilidad[1])
+    p_no_cancelado= round(probabilidad[0]*100)
+    p_cancelado =round(probabilidad[1]*100)
 
-    pred = prediction['predictions']
+    st.write(p_cancelado)
 
-    ## Finally, we can display the prediction to the user
-    st.header(f'La predicción es: {pred}')
+    if p_cancelado > 10:
+        st.error(f"La probabilidad que tu vuelo sea cancelado es {p_cancelado}%!")
+    else:
+        st.success(f'Viaja tranquilo, la probabilidad de que tu vuelo no sea cancelado es {p_no_cancelado}%!')
+        st.balloons()
