@@ -3,7 +3,7 @@ import streamlit as st
 import datetime
 import requests
 import json
-#import streamlit.components.v1 as com
+
 from streamlit_lottie import st_lottie
 
 

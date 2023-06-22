@@ -169,17 +169,18 @@ if submitted:
     #response.json()['predictions']
     #4. Let's retrieve the prediction from the **JSON** returned by the API...s
     prediction = response.json()['predictions']
-    st.write(response.json())
-    st.write(prediction)
+    prediction = int(prediction)
+    #st.write(response.json())
+    #st.write(type(prediction))
 
     if prediction == 3:
         st.error("more than an hour of delay")
     elif prediction == 2:
-        st.success("more than 30 mins and less than 1 hr of delay")
+        st.warning("more than 30 mins and less than 1 hr of delay")
     elif prediction == 1:
         st.success("more than 15 mins and less than 30 mins of delay")
     else:
-        st.success("On time/ before time/ not more than 15 mins of delay")
+        st.info("On time/ before time/ not more than 15 mins of delay")
 
 
 #https://assets4.lottiefiles.com/packages/lf20_JLT8kS.json
