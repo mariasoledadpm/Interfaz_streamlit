@@ -140,6 +140,9 @@ with st.form(key='params_for_api'):
 #Agregar otro espacio vertical
 st.markdown("<br>  <br>", unsafe_allow_html=True)
 
+
+
+
 # Agregar botón
 submitted = col4.form_submit_button("Predict")
 

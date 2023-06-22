@@ -39,7 +39,6 @@ st.markdown(page_bg_img, unsafe_allow_html=True)
 st.title("❓ Don't you know where to look for your data?")
 
 url = "https://www.google.com/travel/flights"
-#st.write("check out this [link](%s)" % url)
 st.markdown("Check out this [link](%s) on Google Flights " % url)
 
 image = Image.open('images/ayuda_completa.png')

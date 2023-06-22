@@ -4,6 +4,7 @@ import datetime
 import requests
 import json
 from streamlit_lottie import st_lottie
+from PIL import Image
 
 #Características básicas
 
@@ -34,18 +35,9 @@ background-position:cover;
 }
 </style>
 """
-
-
-
 st.markdown(page_bg_img, unsafe_allow_html=True)
 
-
-#3 title para definir el título que ve el usuario al abrir la página
-#with open('style.css') as f:
-#    st.markdown(f'<style>{f.read()}</style>', unsafe_allow_html=True)
-
 st.title("SureFly: No Surprises, Just Smooth Skies")
-
 
 
 with st.form(key='params_for_api'):
@@ -121,7 +113,7 @@ with st.form(key='params_for_api'):
         'Month',
         (1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12))
 
-    # Agregar HORARIO DE SALIDA en cuarta columna
+    # Agregar HORARIO DE llegada en cuarta columna
     horario_llegada = col6.time_input('Arrival', datetime.time(8, 1), step=60 )
 
     #Agregar AEROLINEA en quinta columna
@@ -131,19 +123,16 @@ with st.form(key='params_for_api'):
         'Alaska Airlines Inc.', 'Spirit Air Lines', 'Southwest Airlines Co.', 'Delta Air Lines Inc.', 'Atlantic Southeast Airlines',
         'Hawaiian Airlines Inc.', 'American Eagle Airlines Inc.', 'Virgin America'))
 
-    #
-    #Schedule arrival
+    #Schedule time
     scheduled_time = col8.number_input('Duration (min)', step=1)
 
 
 #Agregar otro espacio vertical
 st.markdown("<br>  <br>", unsafe_allow_html=True)
 
-# Agregar botón
+# Agregar botón para iniciar predicción
 submitted = col4.form_submit_button("Predict Delay")
 
-
-#st.write(horario_llegada.strftime("%H%M"))
 
 if submitted:
     #2. Let's build a dictionary containing the parameters for our API...
@@ -161,7 +150,7 @@ if submitted:
 
 
 
-     #3. Let's call our APIusing the `requests` package...
+    #3. Let's call our APIusing the `requests` package...
     flight_predict_delay_api_url ='https://apinueva-icyevpoxta-uw.a.run.app/predict_delays'
     response = requests.get(flight_predict_delay_api_url , params=params)
 
@@ -172,29 +161,26 @@ if submitted:
     #st.write(response.json())
     #st.write(type(prediction))
 
-    #Cargar lottie_image_json
-    def load_lottierurl(url:str):
-        r = requests.get(url)
-        if r.status_code !=200:
-            return None
-        return r.json()
-
-    lottie_url = "https://assets10.lottiefiles.com/packages/lf20_DH7Pl9fUt2.json"
-
     if prediction == 3:
-        st.error("More than an hour of delay")
+        st.error("Predicting a significant delay of over 1 hour.")
+        col1, col2, col3 = st.columns(3)
+        image1mas = Image.open("images/mas1hora.jpg")
+        col2.image(image1mas, width=300)
     elif prediction == 2:
-        st.warning("More than 30 mins and less than 1 hr of delay")
+        st.warning("Projecting a delay of 30 minutes to 1 hour.")
+        col1, col2, col3 = st.columns(3)
+        image301 = Image.open("images/entre30y1.jpg")
+        col2.image(image301, width=300)
     elif prediction == 1:
-        st.success("More than 15 mins and less than 30 mins of delay")
+        st.success("Anticipating a brief delay of 15-30 minutes.")
+        col1, col2, col3 = st.columns(3)
+        image1530 = Image.open("images/entre15y30.jpg")
+        col2.image(image1530, width=300)
     else:
-        st.info("On time/ before time/ not more than 15 mins of delay")
-        lottie_animation = open('images/transparente.json','r').read()
-        st_lottie(lottie_animation, width=300, height=300)
-        #lottie_json = load_lottierurl(lottie_url)
-        #st_lottie(lottie_json, height=300)
-
-#https://assets4.lottiefiles.com/packages/lf20_JLT8kS.json
+        st.info("Expected to be on time.")
+        col1, col2, col3 = st.columns(3)
+        image15 = Image.open("images/menos15min.jpg")
+        col2.image(image15, width=300)
 
 # 0 = On time/ before time/ not more than 15 mins of delay
 # 1 = more than 15 mins and less than 30 mins of delay

@@ -3,14 +3,12 @@ import streamlit as st
 import datetime
 import requests
 import json
-
 from streamlit_lottie import st_lottie
 from PIL import Image
 
-
 #Características básicas
 
-#1 Definir un ícono y título que tendrá la página en la pestaña del navegadorss
+#1 Definir un ícono y título que tendrá la página en la pestaña del navegador
 st.set_page_config(page_title="SureFly ✈️", page_icon="images/icono.png", layout="wide")
 
 #2 image para agregar un logo
@@ -37,19 +35,13 @@ background-position:cover;
 }
 </style>
 """
-
-
-
 st.markdown(page_bg_img, unsafe_allow_html=True)
-
 
 #3 title para definir el título que ve el usuario al abrir la página
 #with open('style.css') as f:
 #    st.markdown(f'<style>{f.read()}</style>', unsafe_allow_html=True)
 
 st.title("SureFly: No Surprises, Just Smooth Skies")
-
-
 
 with st.form(key='params_for_api'):
     #4 Crear columnas para alinear los botones
@@ -124,7 +116,7 @@ with st.form(key='params_for_api'):
         'Month',
         (1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12))
 
-    # Agregar HORARIO DE SALIDA en cuarta columna
+    # Agregar HORARIO DE llegada en cuarta columna
     horario_llegada = col6.time_input('Arrival', datetime.time(8, 1), step=60 )
 
     #Agregar AEROLINEA en quinta columna
@@ -134,23 +126,15 @@ with st.form(key='params_for_api'):
         'Alaska Airlines Inc.', 'Spirit Air Lines', 'Southwest Airlines Co.', 'Delta Air Lines Inc.', 'Atlantic Southeast Airlines',
         'Hawaiian Airlines Inc.', 'American Eagle Airlines Inc.', 'Virgin America'))
 
-    #
-    #Schedule arrival
+    #Schedule time
     scheduled_time = col8.number_input('Duration (min)', step=1)
 
 
 #Agregar otro espacio vertical
 st.markdown("<br>  <br>", unsafe_allow_html=True)
 
-# Agregar botón
-
+# Agregar botón para iniciar predicción
 submitted = col4.form_submit_button("Predict")
-
-
-
-
-
-#st.write(horario_llegada.strftime("%H%M"))
 
 if submitted:
     #2. Let's build a dictionary containing the parameters for our API...
@@ -181,24 +165,11 @@ if submitted:
     p_no_cancelado= round(probabilidad[0]*100)
     p_cancelado =round(probabilidad[1]*100)
 
-    #gato = com.iframe("https://embed.lottiefiles.com/animation/65619")
-
-#Cargar lottie_image_json
-    def load_lottierurl(url:str):
-        r = requests.get(url)
-        if r.status_code !=200:
-            return None
-        return r.json()
-
-    lottie_url = "https://assets1.lottiefiles.com/packages/lf20_I7Pbr6.json"
-
     if p_cancelado > 10:
         st.error(f"Consider alternatives. Your flight has a high {p_cancelado}% cancellation chance.")
         col1, col2, col3 = st.columns(3)
         image2 = Image.open("images/avion_cancelado.png")
         col2.image(image2)
-        #lottie_json = load_lottierurl(lottie_url)
-        #st_lottie(lottie_json, height=300)
     else:
         st.success(f'Travel worry-free! Your flight has a high {p_no_cancelado}% chance of operation.')
         st.balloons()
