@@ -165,6 +165,14 @@ if submitted:
     p_no_cancelado= round(probabilidad[0]*100)
     p_cancelado =round(probabilidad[1]*100)
 
+    def load_lottieurl(url: str):
+        r = requests.get(url)
+        if r.status_code !=200:
+            return None
+        return r.json()
+
+    lottie_url = "https://assets3.lottiefiles.com/private_files/lf30_vdqgavca.json"
+
     if p_cancelado > 10:
         st.error(f"Consider alternatives. Your flight has a high {p_cancelado}% cancellation chance.")
         col1, col2, col3 = st.columns(3)
@@ -173,3 +181,5 @@ if submitted:
     else:
         st.success(f'Travel worry-free! Your flight has a high {p_no_cancelado}% chance of operation.')
         st.balloons()
+        lottie_json = load_lottieurl(lottie_url)
+        st_lottie(lottie_json,height=300)

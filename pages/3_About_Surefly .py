@@ -36,8 +36,8 @@ background-position:cover;
 """
 st.markdown(page_bg_img, unsafe_allow_html=True)
 
-st.title("Flight Cancellation", anchor="title")
-st.header("👎Problems", anchor="chap-1")
+#st.title("Flight Cancellation", anchor="title")
+st.header("👎Addressing Issues", anchor="chap-1")
 
 
 with st.expander("😕 PASSENGERS"):
@@ -68,8 +68,8 @@ with st.expander("✈️ AIRLINES"):
 
 
 st.header("📊 Data", anchor="chap-1")
-with st.expander("📁 DATA KAGGLE"):
-    st.write("Kaggle dataset consisting of 3 tables that contains information about all the flights canceled or delayed during the year 2015 at all airports in the United States.")
+with st.expander("📁 DATA"):
+    st.write("Kaggle +5.8M dataset consisting of 3 tables that contains information about all the flights canceled or delayed at all airports in the United States.")
     url = "https://www.kaggle.com/datasets/usdot/flight-delays"
     st.markdown("Check out this [link](%s) on Kaggle. " % url)
 

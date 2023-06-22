@@ -50,7 +50,7 @@ with st.expander("TEAM"):
         st.markdown(
             """
             <div style="display: flex; justify-content: center;">
-                <img src="https://storage.googleapis.com/taxifare_mariasoledadpm/Untitled.png" alt="Imagen" width="200"/>
+                <img src="https://storage.googleapis.com/taxifare_mariasoledadpm/qrdiego.png" alt="Imagen" width="300"/>
             </div>
             """,
             unsafe_allow_html=True
@@ -61,7 +61,7 @@ with st.expander("TEAM"):
         st.markdown(
             """
             <div style="display: flex; justify-content: center;">
-                <img src="https://storage.googleapis.com/taxifare_mariasoledadpm/Sole.png" alt="Imagen" width="200"/>
+                <img src="https://storage.googleapis.com/taxifare_mariasoledadpm/qrsole.png" alt="Imagen" width="300"/>
             </div>
             """,
             unsafe_allow_html=True
@@ -72,7 +72,7 @@ with st.expander("TEAM"):
         st.markdown(
             """
             <div style="display: flex; justify-content: center;">
-                <img src="https://storage.googleapis.com/taxifare_mariasoledadpm/Nacho.png" alt="Imagen" width="200"/>
+                <img src="https://storage.googleapis.com/taxifare_mariasoledadpm/qrchimpX4096.png" alt="Imagen" width="300"/>
             </div>
             """,
             unsafe_allow_html=True
