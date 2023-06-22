@@ -3,8 +3,7 @@ import streamlit as st
 import datetime
 import requests
 import json
-
-
+from streamlit_lottie import st_lottie
 
 #Características básicas
 
@@ -173,6 +172,15 @@ if submitted:
     #st.write(response.json())
     #st.write(type(prediction))
 
+    #Cargar lottie_image_json
+    def load_lottierurl(url:str):
+        r = requests.get(url)
+        if r.status_code !=200:
+            return None
+        return r.json()
+
+    lottie_url = "https://assets10.lottiefiles.com/packages/lf20_DH7Pl9fUt2.json"
+
     if prediction == 3:
         st.error("More than an hour of delay")
     elif prediction == 2:
@@ -181,7 +189,10 @@ if submitted:
         st.success("More than 15 mins and less than 30 mins of delay")
     else:
         st.info("On time/ before time/ not more than 15 mins of delay")
-
+        lottie_animation = open('images/transparente.json','r').read()
+        st_lottie(lottie_animation, width=300, height=300)
+        #lottie_json = load_lottierurl(lottie_url)
+        #st_lottie(lottie_json, height=300)
 
 #https://assets4.lottiefiles.com/packages/lf20_JLT8kS.json
 

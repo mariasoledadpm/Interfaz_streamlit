@@ -42,7 +42,7 @@ url = "https://www.google.com/travel/flights"
 #st.write("check out this [link](%s)" % url)
 st.markdown("Check out this [link](%s) on Google Flights " % url)
 
-image = Image.open('images/ayuda_info.png')
+image = Image.open('images/ayuda_completa.png')
 st.image(image, width=1300, caption="User interface legend")
 
 st.subheader("User interface legend")
