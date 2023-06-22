@@ -36,30 +36,19 @@ background-position:cover;
 """
 st.markdown(page_bg_img, unsafe_allow_html=True)
 
-st.title("Don't you know where to look for your data?")
+st.title("❓ Don't you know where to look for your data?")
 
 url = "https://www.google.com/travel/flights"
 #st.write("check out this [link](%s)" % url)
 st.markdown("Check out this [link](%s) on Google Flights " % url)
 
-image = Image.open('images/ayuda_1.png')
-st.image(image)
-st.caption("Airline, Scheduled arrival, Scheduled time")
+image = Image.open('images/ayuda_info.png')
+st.image(image, width=1300, caption="User interface legend")
 
-image2 = Image.open('images/ayuda_2.png')
-st.image(image2)
-st.caption("Origin airport, Destination airport")
-
-
-
-st.markdown("""
-    # Glosario
-    """)
-st.markdown("""
-    1.Origin Airport,
-    2.Destination Airport,
-    3.Day,
-    4.Day of week,
-    5.Month,
-    """
-)
+st.subheader("User interface legend")
+st.write("🔹Black: Origin Airport")
+st.write("🔹Red: Destination Airport")
+st.write("🔹Yellow: Day, day of week, month")
+st.write("🔹Turquoise: Arrival")
+st.write("🔹Purple: Airline")
+st.write("🔹Green: Duration (min)")

@@ -3,7 +3,8 @@ import streamlit as st
 import datetime
 import requests
 import json
-
+#import streamlit.components.v1 as com
+from streamlit_lottie import st_lottie
 
 
 #Características básicas
@@ -141,7 +142,11 @@ with st.form(key='params_for_api'):
 st.markdown("<br>  <br>", unsafe_allow_html=True)
 
 # Agregar botón
+
 submitted = col4.form_submit_button("Predict")
+
+
+
 
 
 #st.write(horario_llegada.strftime("%H%M"))
@@ -161,7 +166,7 @@ if submitted:
 
 
     #3. Let's call our APIusing the `requests` package...
-    flight_predict_api_url ='https://flightpredictor-icyevpoxta-uw.a.run.app/predict'
+    flight_predict_api_url ='https://apinueva-icyevpoxta-uw.a.run.app/predict'
     response = requests.get(flight_predict_api_url, params=params)
 
     #response.json()['predictions']
@@ -175,10 +180,21 @@ if submitted:
     p_no_cancelado= round(probabilidad[0]*100)
     p_cancelado =round(probabilidad[1]*100)
 
+    #gato = com.iframe("https://embed.lottiefiles.com/animation/65619")
 
+#Cargar lottie_image_json
+    def load_lottierurl(url:str):
+        r = requests.get(url)
+        if r.status_code !=200:
+            return None
+        return r.json()
+
+    lottie_url = "https://assets1.lottiefiles.com/packages/lf20_I7Pbr6.json"
 
     if p_cancelado > 10:
         st.error(f"Consider alternatives. Your flight has a high {p_cancelado}% cancellation chance.")
+        lottie_json = load_lottierurl(lottie_url)
+        st_lottie(lottie_json, height=300)
     else:
         st.success(f'Travel worry-free! Your flight has a high {p_no_cancelado}% chance of operation.')
         st.balloons()
