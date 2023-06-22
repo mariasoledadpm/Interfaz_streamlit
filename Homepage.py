@@ -5,6 +5,7 @@ import requests
 import json
 
 from streamlit_lottie import st_lottie
+from PIL import Image
 
 
 #Características básicas
@@ -193,8 +194,11 @@ if submitted:
 
     if p_cancelado > 10:
         st.error(f"Consider alternatives. Your flight has a high {p_cancelado}% cancellation chance.")
-        lottie_json = load_lottierurl(lottie_url)
-        st_lottie(lottie_json, height=300)
+        col1, col2, col3 = st.columns(3)
+        image2 = Image.open("images/avion_cancelado.png")
+        col2.image(image2)
+        #lottie_json = load_lottierurl(lottie_url)
+        #st_lottie(lottie_json, height=300)
     else:
         st.success(f'Travel worry-free! Your flight has a high {p_no_cancelado}% chance of operation.')
         st.balloons()

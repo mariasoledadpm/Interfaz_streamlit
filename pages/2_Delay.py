@@ -174,11 +174,11 @@ if submitted:
     #st.write(type(prediction))
 
     if prediction == 3:
-        st.error("more than an hour of delay")
+        st.error("More than an hour of delay")
     elif prediction == 2:
-        st.warning("more than 30 mins and less than 1 hr of delay")
+        st.warning("More than 30 mins and less than 1 hr of delay")
     elif prediction == 1:
-        st.success("more than 15 mins and less than 30 mins of delay")
+        st.success("More than 15 mins and less than 30 mins of delay")
     else:
         st.info("On time/ before time/ not more than 15 mins of delay")
 
